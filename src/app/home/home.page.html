@@ -10,6 +10,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-input label="Search" placeholder="Enter movie name"></ion-input>
-  <ion-button expand="block" shape="round">Search</ion-button>
+  <ion-input label="Search" placeholder="Enter movie name" [(ngModel)]="keyword"></ion-input>
+  <ion-button (click)="searchMovies()" expand="block" shape="round">Search</ion-button>
 </ion-content>
