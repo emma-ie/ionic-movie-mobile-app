@@ -8,5 +8,6 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
   imports: [IonHeader, IonToolbar, IonTitle, IonContent],
 })
 export class HomePage {
+  studentNum:string = "G00474347";
   constructor() {}
 }
