@@ -5,7 +5,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonIcon, IonButt
 import { Router } from '@angular/router';
 import { MyDataService } from '../services/my-data-service';
 import { addIcons } from 'ionicons';
-import { heartOutline } from 'ionicons/icons'
+import { heartOutline, heart } from 'ionicons/icons'
 import { HttpOptions } from '@capacitor/core';
 import { MyHttpService } from '../services/my-http-service';
 

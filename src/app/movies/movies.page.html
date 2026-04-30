@@ -11,6 +11,9 @@
     <ion-card-header>
       <ion-card-title>{{movie.title}}</ion-card-title>
       <ion-card-subtitle>{{movie.release_date}}</ion-card-subtitle>
+      <ion-button (click)="toggleFavourite(movie)">
+        <ion-icon [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
+      </ion-button>
     </ion-card-header>
 
     <ion-card-content>
