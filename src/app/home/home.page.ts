@@ -41,7 +41,6 @@ export class HomePage {
     this.movies = result.data.results;
   }
 
-
   async searchMovies() {
     if (!this.keyword){
       return;
@@ -50,5 +49,4 @@ export class HomePage {
     await this.mds.set("keyword", this.keyword);
     this.router.navigate(['/movies']);
   }
-
 }

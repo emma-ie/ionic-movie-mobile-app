@@ -36,5 +36,4 @@ export class MoviesPage implements OnInit {
     this.movies = result.data.results;
     console.log(this.movies);
   }
-
 }
