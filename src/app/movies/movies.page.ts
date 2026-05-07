@@ -8,6 +8,7 @@ import { HttpOptions } from '@capacitor/core';
 import { FavouritesService } from '../services/favourites-service';
 import { addIcons } from 'ionicons';
 import { heart, heartOutline } from 'ionicons/icons'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -23,7 +24,7 @@ export class MoviesPage implements OnInit {
   favourites:any[] = [];
   apiKey:string = "71a8936961cc7f72bb39f09894041612";
 
-  constructor(private mds:MyDataService, private mhs:MyHttpService, private favService:FavouritesService) { 
+  constructor(private mds:MyDataService, private mhs:MyHttpService, private favService:FavouritesService, private router:Router) { 
     addIcons({ heart, heartOutline});
   }
   
@@ -55,5 +56,9 @@ export class MoviesPage implements OnInit {
 
   isFavourite(movie:any): boolean{
     return this.favService.isFavourite(movie);
+  }
+
+  goToFavourites(){
+    this.router.navigate(['/favourites']);
   }
 }

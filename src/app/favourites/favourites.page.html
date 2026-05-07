@@ -1,10 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Favourites</ion-title>
+    <ion-title>My Favourite Movies</ion-title>
+    <ion-button (click)="goHome()" slot="end" fill="clear">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-text *ngIf="favourites.length === 0">
+    <h1>No favourites added yet.</h1>
+  </ion-text>
+
   <ion-card *ngFor="let movie of favourites">
     <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
     <ion-card-header>

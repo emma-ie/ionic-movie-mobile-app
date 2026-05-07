@@ -1,24 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonText } from '@ionic/angular/standalone';
 import { FavouritesService } from '../services/favourites-service';
 import { addIcons } from 'ionicons';
-import { heart, heartOutline } from 'ionicons/icons'
+import { heart, heartOutline, homeOutline } from 'ionicons/icons'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favourites',
   templateUrl: './favourites.page.html',
   styleUrls: ['./favourites.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonText]
 })
 export class FavouritesPage implements OnInit {
 
   favourites: any[] = [];
 
-  constructor(private favService: FavouritesService) {
-    addIcons({ heart, heartOutline });
+  constructor(private favService: FavouritesService, private router:Router) {
+    addIcons({ heart, heartOutline, homeOutline });
    }
 
   ngOnInit() {
@@ -36,4 +37,7 @@ export class FavouritesPage implements OnInit {
     this.loadFavourites();
   }
 
+  goHome(){
+    this.router.navigate(['/']);
+  }
 }

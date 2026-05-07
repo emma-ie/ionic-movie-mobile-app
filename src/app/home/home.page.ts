@@ -7,6 +7,7 @@ import { MyDataService } from '../services/my-data-service';
 import { addIcons } from 'ionicons';
 import { heartOutline, heart } from 'ionicons/icons'
 import { HttpOptions } from '@capacitor/core';
+import { FavouritesService } from '../services/favourites-service';
 import { MyHttpService } from '../services/my-http-service';
 
 @Component({
@@ -21,8 +22,9 @@ export class HomePage {
   keyword: string = "";
   apiKey:string = "71a8936961cc7f72bb39f09894041612";
   movies:any[] = [];
+  favourites:any[] = [];
   
-  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService) {
+  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService:FavouritesService) {
     addIcons({ heartOutline })
   }
 
@@ -48,5 +50,22 @@ export class HomePage {
 
     await this.mds.set("keyword", this.keyword);
     this.router.navigate(['/movies']);
+  }
+
+  async loadFavourites(){
+    this.favourites = await this.favService.getFavourites();
+  }
+
+  async toggleFavourite(movie:any){
+    await this.favService.addRemoveFavourites(movie);
+    this.loadFavourites();
+  }
+
+  isFavourite(movie:any): boolean{
+    return this.favService.isFavourite(movie);
+  }
+
+  goToFavourites(){
+    this.router.navigate(['/favourites']);
   }
 }
