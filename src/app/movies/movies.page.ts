@@ -7,7 +7,7 @@ import { MyHttpService } from '../services/my-http-service';
 import { HttpOptions } from '@capacitor/core';
 import { FavouritesService } from '../services/favourites-service';
 import { addIcons } from 'ionicons';
-import { heart, heartOutline } from 'ionicons/icons'
+import { heart, heartOutline, homeOutline } from 'ionicons/icons'
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +25,7 @@ export class MoviesPage implements OnInit {
   apiKey:string = "71a8936961cc7f72bb39f09894041612";
 
   constructor(private mds:MyDataService, private mhs:MyHttpService, private favService:FavouritesService, private router:Router) { 
-    addIcons({ heart, heartOutline});
+    addIcons({ heart, heartOutline, homeOutline });
   }
   
   ngOnInit() {
@@ -66,7 +66,9 @@ export class MoviesPage implements OnInit {
     this.router.navigate(['/']);
   }
 
-  openMovie(movie:any){
+  async openMovie(movie:any){
+    await this.mds.set("movieId", movie.id);
+    console.log("Saved ID: ", movie.id);
     this.router.navigate(['/movie-details', movie.id]);
   }
 }

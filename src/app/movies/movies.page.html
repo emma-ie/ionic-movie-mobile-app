@@ -12,6 +12,7 @@
 
 <ion-content [fullscreen]="true">
   <h3>{{keyword | titlecase}} Movies</h3>
+  
   <ion-card *ngFor="let movie of movies">
     <img (click)="openMovie(movie)" alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
     <ion-card-header>

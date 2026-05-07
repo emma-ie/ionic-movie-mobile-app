@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Movie Details</ion-title>
+    <ion-title>{{movie.title}}</ion-title>
     <ion-button (click)="goToFavourites()" slot="end" fill="clear">
       <ion-icon color="danger" name="heart-outline"></ion-icon>
     </ion-button>
@@ -11,9 +11,37 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">movie-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Movie details (overview) -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ movie.title }}</ion-card-title>
+      <ion-card-subtitle>{{ movie.release_date }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{movie.overview}}
+    </ion-card-content>
+    <ion-button (click)="toggleFavourite(movie)">
+      <ion-icon [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
+    </ion-button>
+  </ion-card>
+
+
+  <!-- Cast information -->
+  <ion-card *ngFor="let c of cast">
+    <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w200/' + c.profile_path" />
+    <ion-card-content>
+      <h2>{{ c.name }} as {{ c.character }}</h2>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- Crew information -->
+  <ion-card *ngFor="let c of crew">
+    <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w200/' + c.profile_path" />
+    <ion-card-content>
+      <h2>{{ c.name }}, {{ c.job }}</h2>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
