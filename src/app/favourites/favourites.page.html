@@ -5,9 +5,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Favourites</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card *ngFor="let movie of favourites">
+    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+    <ion-card-header>
+      <ion-card-title>{{movie.title}}</ion-card-title>
+      <ion-card-subtitle>{{movie.release_date}}</ion-card-subtitle>
+      <ion-button (click)="toggleFavourite(movie)">
+        <ion-icon name='heart'></ion-icon>
+      </ion-button>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{movie.overview}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
