@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { heart, heartOutline, homeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -14,7 +14,7 @@ import { FavouritesService } from '../services/favourites-service';
   templateUrl: './movie-details.page.html',
   styleUrls: ['./movie-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel]
 })
 export class MovieDetailsPage implements OnInit {
 
@@ -76,6 +76,14 @@ export class MovieDetailsPage implements OnInit {
 
   goHome() {
     this.router.navigate(['/']);
+  }
+
+  buttonText(movie: any) {
+    if (this.isFavourite(movie)) {
+      return "Remove from Favourites";
+    }
+
+    return "Add to Favourites";
   }
 
 }
