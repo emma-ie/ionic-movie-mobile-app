@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>{{movie.title}}</ion-title>
+    <ion-title>{{ movie.title }}</ion-title>
     <ion-button (click)="goToFavourites()" slot="end" fill="clear">
       <ion-icon color="danger" name="heart-outline"></ion-icon>
     </ion-button>
@@ -11,7 +11,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Movie details (overview) -->
+
+  <!-- Movie overview -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{ movie.title }}</ion-card-title>
@@ -19,7 +20,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      {{movie.overview}}
+      {{ movie.overview }}
     </ion-card-content>
     <ion-button (click)="toggleFavourite(movie)" class="fav-button">
       <ion-icon class="fav-icon" [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
@@ -35,14 +36,14 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item *ngFor="let c of cast">
-
-        <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w200/' + c.profile_path" />
-        <ion-label>
-          <h2>{{ c.name }} as {{ c.character }}</h2>
-        </ion-label>
-      </ion-item>
-
+      <ion-list>
+        <ion-item *ngFor="let c of cast" button="true" (click)="openPerson(c)">
+          <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w200/' + c.profile_path" />
+          <ion-label>
+            <h2>{{ c.name }} as {{ c.character }}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 
@@ -53,10 +54,13 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item *ngFor="let c of crew">
-
-        <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w200/' + c.profile_path" />
-        <ion-label>
-          <h2>{{ c.name }}, {{ c.job }}</h2>
-        </ion-label>
-      </ion-item>
+      <ion-list>
+        <ion-item *ngFor="let c of crew" button="true" (click)="openPerson(c)">
+          <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w200/' + c.profile_path" />
+          <ion-label>
+            <h2>{{ c.name }}, {{ c.job }}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>

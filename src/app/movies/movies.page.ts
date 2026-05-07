@@ -15,25 +15,25 @@ import { Router } from '@angular/router';
   templateUrl: './movies.page.html',
   styleUrls: ['./movies.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardSubtitle, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonButton, IonIcon ]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardSubtitle, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonButton, IonIcon]
 })
 export class MoviesPage implements OnInit {
 
-  keyword:string = "";
-  movies:any[] = [];
-  favourites:any[] = [];
-  apiKey:string = "71a8936961cc7f72bb39f09894041612";
+  keyword: string = "";
+  movies: any[] = [];
+  favourites: any[] = [];
+  apiKey: string = "71a8936961cc7f72bb39f09894041612";
 
-  constructor(private mds:MyDataService, private mhs:MyHttpService, private favService:FavouritesService, private router:Router) { 
+  constructor(private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService, private router: Router) {
     addIcons({ heart, heartOutline, homeOutline });
   }
-  
+
   ngOnInit() {
     this.getKeyword();
     this.loadFavourites();
   }
-  
-  async getKeyword(){
+
+  async getKeyword() {
     this.keyword = await this.mds.get("keyword");
 
     const options: HttpOptions = {
@@ -45,29 +45,29 @@ export class MoviesPage implements OnInit {
     console.log(this.movies);
   }
 
-  async loadFavourites(){
+  async loadFavourites() {
     this.favourites = await this.favService.getFavourites();
   }
 
-  async toggleFavourite(movie:any){
+  async toggleFavourite(movie: any) {
     await this.favService.addRemoveFavourites(movie);
     this.loadFavourites();
   }
 
-  isFavourite(movie:any): boolean{
+  isFavourite(movie: any): boolean {
     return this.favService.isFavourite(movie);
   }
 
-  goToFavourites(){
+  goToFavourites() {
     this.router.navigate(['/favourites']);
   }
 
-  goHome(){
+  goHome() {
     this.router.navigate(['/']);
   }
 
-  async openMovie(movie:any){
-    await this.mds.set("movieId", movie.id);
+  openMovie(movie: any) {
+    this.mds.set("movieId", movie.id);
     console.log("Saved ID: ", movie.id);
     this.router.navigate(['/movie-details', movie.id]);
   }

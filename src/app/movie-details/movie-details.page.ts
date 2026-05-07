@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel, IonList } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { heart, heartOutline, homeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -14,7 +14,7 @@ import { FavouritesService } from '../services/favourites-service';
   templateUrl: './movie-details.page.html',
   styleUrls: ['./movie-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel, IonList]
 })
 export class MovieDetailsPage implements OnInit {
 
@@ -30,24 +30,24 @@ export class MovieDetailsPage implements OnInit {
 
   ngOnInit() {
     console.log("ngOnInit in movie details");
-    this.loadMovie(this.movie);
+    this.loadMovie();
   }
 
-  async loadMovie(movie: any) {
+  async loadMovie() {
     console.log("loadMovie called");
 
     let id = await this.mds.get("movieId");
 
     console.log("Movie ID:", id);
 
-    let movieOptions = {
+    const movieOptions = {
       url: "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + this.apiKey
     };
 
     let movieRes = await this.mhs.get(movieOptions);
     this.movie = movieRes.data;
 
-    let creditOptions = {
+    const creditOptions = {
       url: "https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + this.apiKey
     };
 
@@ -55,6 +55,13 @@ export class MovieDetailsPage implements OnInit {
 
     this.cast = creditRes.data.cast;
     this.crew = creditRes.data.crew;
+  }
+
+  openPerson(person: any) {
+    console.log("open person called");
+    this.mds.set("personId", person.id);
+    this.router.navigateByUrl('/person-details/' + person.id);
+    console.log("Person clicked: ", person)
   }
 
   async loadFavourites() {

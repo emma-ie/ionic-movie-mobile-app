@@ -12,18 +12,18 @@ export const routes: Routes = [
   },
   {
     path: 'movies',
-    loadComponent: () => import('./movies/movies.page').then( m => m.MoviesPage)
+    loadComponent: () => import('./movies/movies.page').then(m => m.MoviesPage)
   },
   {
     path: 'favourites',
-    loadComponent: () => import('./favourites/favourites.page').then( m => m.FavouritesPage)
-  },
-  {
-    path: 'favourites',
-    loadComponent: () => import('./favourites/favourites.page').then( m => m.FavouritesPage)
+    loadComponent: () => import('./favourites/favourites.page').then(m => m.FavouritesPage)
   },
   {
     path: 'movie-details/:id',
-    loadComponent: () => import('./movie-details/movie-details.page').then( m => m.MovieDetailsPage)
+    loadComponent: () => import('./movie-details/movie-details.page').then(m => m.MovieDetailsPage)
+  },
+  {
+    path: 'person-details/:id',
+    loadComponent: () => import('./person-details/person-details.page').then(m => m.PersonDetailsPage)
   },
 ];
