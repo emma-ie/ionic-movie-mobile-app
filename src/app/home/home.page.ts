@@ -24,8 +24,8 @@ export class HomePage {
   movies:any[] = [];
   favourites:any[] = [];
   
-  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService:FavouritesService) {
-    addIcons({ heartOutline })
+  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService) {
+    addIcons({ heart, heartOutline });
   }
 
   ngOnInit(){
@@ -67,5 +67,9 @@ export class HomePage {
 
   goToFavourites(){
     this.router.navigate(['/favourites']);
+  }
+
+  openMovie(movie:any){
+    this.router.navigate(['/movie-details', movie.id]);
   }
 }

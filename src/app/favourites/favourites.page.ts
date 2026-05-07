@@ -40,4 +40,8 @@ export class FavouritesPage implements OnInit {
   goHome(){
     this.router.navigate(['/']);
   }
+
+  openMovie(movie:any){
+    this.router.navigate(['/movie-details', movie.id]);
+  }
 }

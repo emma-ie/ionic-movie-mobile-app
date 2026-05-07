@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './movies.page.html',
   styleUrls: ['./movies.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardSubtitle, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonButton, IonIcon]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardSubtitle, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonButton, IonIcon ]
 })
 export class MoviesPage implements OnInit {
 
@@ -60,5 +60,13 @@ export class MoviesPage implements OnInit {
 
   goToFavourites(){
     this.router.navigate(['/favourites']);
+  }
+
+  goHome(){
+    this.router.navigate(['/']);
+  }
+
+  openMovie(movie:any){
+    this.router.navigate(['/movie-details', movie.id]);
   }
 }

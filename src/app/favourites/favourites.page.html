@@ -13,9 +13,9 @@
   </ion-text>
 
   <ion-card *ngFor="let movie of favourites">
-    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+    <img (click)="openMovie(movie)" alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
     <ion-card-header>
-      <ion-card-title>{{movie.title}}</ion-card-title>
+      <ion-card-title (click)="openMovie(movie)">{{movie.title}}</ion-card-title>
       <ion-card-subtitle>{{movie.release_date}}</ion-card-subtitle>
       <ion-button (click)="toggleFavourite(movie)">
         <ion-icon name='heart'></ion-icon>
