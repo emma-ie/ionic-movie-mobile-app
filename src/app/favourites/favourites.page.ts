@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonText } from '@ionic/angular/standalone';
 import { FavouritesService } from '../services/favourites-service';
-import { addIcons } from 'ionicons';
-import { heart, heartOutline, homeOutline } from 'ionicons/icons'
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +17,6 @@ export class FavouritesPage implements OnInit {
   favourites: any[] = [];
 
   constructor(private favService: FavouritesService, private router:Router) {
-    addIcons({ heart, heartOutline, homeOutline });
    }
 
   ngOnInit() {

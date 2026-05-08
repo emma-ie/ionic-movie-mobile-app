@@ -5,8 +5,6 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, Io
 import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 import { Router } from '@angular/router';
-import { addIcons } from 'ionicons';
-import { heart, heartOutline, homeOutline } from 'ionicons/icons';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,7 +20,6 @@ export class PersonDetailsPage implements OnInit {
   movies: any[] = [];
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private router: Router) {
-    addIcons({ heart, heartOutline, homeOutline });
   }
 
   ngOnInit() {

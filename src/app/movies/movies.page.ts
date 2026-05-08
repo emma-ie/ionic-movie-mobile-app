@@ -6,8 +6,6 @@ import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 import { HttpOptions } from '@capacitor/core';
 import { FavouritesService } from '../services/favourites-service';
-import { addIcons } from 'ionicons';
-import { heart, heartOutline, homeOutline } from 'ionicons/icons'
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +23,6 @@ export class MoviesPage implements OnInit {
   favourites: any[] = [];
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService, private router: Router) {
-    addIcons({ heart, heartOutline, homeOutline });
   }
 
   ngOnInit() {

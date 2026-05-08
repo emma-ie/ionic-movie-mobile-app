@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel, IonList } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { heart, heartOutline, homeOutline } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
 import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 import { FavouritesService } from '../services/favourites-service';
@@ -25,7 +23,6 @@ export class MovieDetailsPage implements OnInit {
   favourites: any[] = [];
 
   constructor(private router: Router, private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService) {
-    addIcons({ heart, heartOutline, homeOutline });
   }
 
   ngOnInit() {
