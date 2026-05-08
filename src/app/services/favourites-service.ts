@@ -6,15 +6,15 @@ import { MyDataService } from './my-data-service';
 })
 export class FavouritesService {
   favourites: any[] = [];
-  
-  constructor(private mds:MyDataService){}
+
+  constructor(private mds: MyDataService) { }
 
   // Get favourites from storage
-  async getFavourites(){
+  async getFavourites() {
     let favourites = await this.mds.get("favourites");
-    
+
     // If data exists in favourites (i.e. not empty), convert to array
-    if (favourites){
+    if (favourites) {
       this.favourites = JSON.parse(favourites);
     } else {
       // If no data exists in favourites, create empty array
@@ -25,9 +25,15 @@ export class FavouritesService {
   }
 
   // Check if a movie is already favourited
-  isFavourite(movie:any): boolean {
-    for (let i = 0; i < this.favourites.length; i++){
-      if (this.favourites[i].id === movie.id){
+  isFavourite(movie: any): boolean {
+    if (!movie || !movie.id) {
+      return false;
+    }
+
+    for (let i = 0; i < this.favourites.length; i++) {
+      let fav = this.favourites[i];
+
+      if (fav && fav.id === movie.id) {
         return true;
       }
     }
@@ -35,23 +41,23 @@ export class FavouritesService {
   }
 
   // Add or remove a movie from favourites 
-  async addRemoveFavourites(movie:any){
+  async addRemoveFavourites(movie: any) {
     let exists = this.isFavourite(movie);
 
     // If the movie is in favourites, remove it
     if (exists) {
       // Create new array to push all other favourite movies to
       let newFavourites = [];
-      
+
       // Loop through array of favourites
-      for (let i = 0; i < this.favourites.length; i++){
+      for (let i = 0; i < this.favourites.length; i++) {
         // If the movie ID is not the movie ID to remove, push to new array
-        if (this.favourites[i].id !== movie.id){
+        if (this.favourites[i].id !== movie.id) {
           newFavourites.push(this.favourites[i]);
         }
-      } 
+      }
       this.favourites = newFavourites;
-    } 
+    }
     else {
       // Add new movie to favourites
       this.favourites.push(movie);

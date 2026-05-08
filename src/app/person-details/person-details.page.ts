@@ -7,6 +7,7 @@ import { MyHttpService } from '../services/my-http-service';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { heart, heartOutline, homeOutline } from 'ionicons/icons';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-person-details',
@@ -19,7 +20,6 @@ export class PersonDetailsPage implements OnInit {
 
   person: any;
   movies: any[] = [];
-  apiKey: string = "71a8936961cc7f72bb39f09894041612";
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private router: Router) {
     addIcons({ heart, heartOutline, homeOutline });
@@ -36,14 +36,14 @@ export class PersonDetailsPage implements OnInit {
     let id = await this.mds.get("personId");
 
     const personOptions = {
-      url: "https://api.themoviedb.org/3/person/" + id + "?api_key=" + this.apiKey
+      url: "https://api.themoviedb.org/3/person/" + id + "?api_key=" + environment.apiKey
     };
 
     let personRes = await this.mhs.get(personOptions);
     this.person = personRes.data;
 
     const movieOptions = {
-      url: "https://api.themoviedb.org/3/person/" + id + "/movie_credits?api_key=" + this.apiKey
+      url: "https://api.themoviedb.org/3/person/" + id + "/movie_credits?api_key=" + environment.apiKey
     };
 
     let movieRes = await this.mhs.get(movieOptions);

@@ -9,6 +9,7 @@ import { FavouritesService } from '../services/favourites-service';
 import { addIcons } from 'ionicons';
 import { heart, heartOutline, homeOutline } from 'ionicons/icons'
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movies',
@@ -22,7 +23,6 @@ export class MoviesPage implements OnInit {
   keyword: string = "";
   movies: any[] = [];
   favourites: any[] = [];
-  apiKey: string = "71a8936961cc7f72bb39f09894041612";
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService, private router: Router) {
     addIcons({ heart, heartOutline, homeOutline });
@@ -40,7 +40,7 @@ export class MoviesPage implements OnInit {
     this.keyword = await this.mds.get("keyword");
 
     const options: HttpOptions = {
-      url: "https://api.themoviedb.org/3/search/movie?query=" + this.keyword + "&api_key=" + this.apiKey
+      url: "https://api.themoviedb.org/3/search/movie?query=" + this.keyword + "&api_key=" + environment.apiKey
     }
 
     let result = await this.mhs.get(options);

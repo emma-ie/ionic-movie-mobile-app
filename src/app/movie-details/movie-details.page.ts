@@ -8,6 +8,7 @@ import { addIcons } from 'ionicons';
 import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 import { FavouritesService } from '../services/favourites-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movie-details',
@@ -22,7 +23,6 @@ export class MovieDetailsPage implements OnInit {
   cast: any[] = [];
   crew: any[] = [];
   favourites: any[] = [];
-  apiKey: string = "71a8936961cc7f72bb39f09894041612";
 
   constructor(private router: Router, private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService) {
     addIcons({ heart, heartOutline, homeOutline });
@@ -44,14 +44,14 @@ export class MovieDetailsPage implements OnInit {
     console.log("Movie ID:", id);
 
     const movieOptions = {
-      url: "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + this.apiKey
+      url: "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + environment.apiKey
     };
 
     let movieRes = await this.mhs.get(movieOptions);
     this.movie = movieRes.data;
 
     const creditOptions = {
-      url: "https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + this.apiKey
+      url: "https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + environment.apiKey
     };
 
     let creditRes = await this.mhs.get(creditOptions);

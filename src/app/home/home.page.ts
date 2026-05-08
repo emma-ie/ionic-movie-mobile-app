@@ -9,6 +9,7 @@ import { heartOutline, heart } from 'ionicons/icons'
 import { HttpOptions } from '@capacitor/core';
 import { FavouritesService } from '../services/favourites-service';
 import { MyHttpService } from '../services/my-http-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,6 @@ export class HomePage {
   keyword: string = "";
   movies:any[] = [];
   favourites:any[] = [];
-  apiKey:string = "71a8936961cc7f72bb39f09894041612";
   
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService) {
     addIcons({ heart, heartOutline });
@@ -39,7 +39,7 @@ export class HomePage {
     console.log("Loading trending movies");
 
     const options: HttpOptions = {
-      url: "https://api.themoviedb.org/3/trending/movie/day?api_key=" + this.apiKey
+      url: "https://api.themoviedb.org/3/trending/movie/day?api_key=" + environment.apiKey
     }
 
     let result = await this.mhs.get(options);
