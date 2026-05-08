@@ -8,6 +8,7 @@ import { MyHttpService } from '../services/my-http-service';
 import { FavouritesService } from '../services/favourites-service';
 import { environment } from 'src/environments/environment';
 import { Movie } from '../models/movie.model';
+import { Person } from '../models/person.model';
 
 @Component({
   selector: 'app-movie-details',
@@ -18,10 +19,10 @@ import { Movie } from '../models/movie.model';
 })
 export class MovieDetailsPage implements OnInit {
 
-  movie!: Movie;
-  cast: any[] = [];
-  crew: any[] = [];
-  favourites: any[] = [];
+  movie: Movie;
+  cast: Person[] = [];
+  crew: Person[] = [];
+  favourites: Movie[] = [];
 
   constructor(private router: Router, private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService) {
   }
@@ -58,7 +59,7 @@ export class MovieDetailsPage implements OnInit {
     this.crew = creditRes.data.crew;
   }
 
-  openPerson(person: any) {
+  openPerson(person: Person) {
     console.log("open person called");
     this.mds.set("personId", person.id);
     this.router.navigateByUrl('/person-details/' + person.id);
@@ -69,12 +70,12 @@ export class MovieDetailsPage implements OnInit {
     this.favourites = await this.favService.getFavourites();
   }
 
-  async toggleFavourite(movie: any) {
+  async toggleFavourite(movie: Movie) {
     await this.favService.addRemoveFavourites(movie);
     this.loadFavourites();
   }
 
-  isFavourite(movie: any): boolean {
+  isFavourite(movie: Movie): boolean {
     return this.favService.isFavourite(movie);
   }
 
@@ -86,7 +87,7 @@ export class MovieDetailsPage implements OnInit {
     this.router.navigate(['/']);
   }
 
-  buttonText(movie: any) {
+  buttonText(movie: Movie) {
     if (this.isFavourite(movie)) {
       return "Remove from Favourites";
     }

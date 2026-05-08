@@ -21,7 +21,7 @@ export class MoviesPage implements OnInit {
 
   keyword: string = "";
   movies: Movie[] = [];
-  favourites: any[] = [];
+  favourites: Movie[] = [];
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService, private router: Router) {
   }

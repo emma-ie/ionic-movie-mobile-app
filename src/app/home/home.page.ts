@@ -8,6 +8,7 @@ import { HttpOptions } from '@capacitor/core';
 import { FavouritesService } from '../services/favourites-service';
 import { MyHttpService } from '../services/my-http-service';
 import { environment } from 'src/environments/environment';
+import { Movie } from '../models/movie.model';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +20,8 @@ export class HomePage {
 
   studentNum: string = "G00474347";
   keyword: string = "";
-  movies:any[] = [];
-  favourites:any[] = [];
+  movies: Movie[] = [];
+  favourites: Movie[] = [];
   
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService) {
   }
@@ -56,12 +57,12 @@ export class HomePage {
     this.favourites = await this.favService.getFavourites();
   }
 
-  async toggleFavourite(movie:any){
+  async toggleFavourite(movie: Movie){
     await this.favService.addRemoveFavourites(movie);
     this.loadFavourites();
   }
 
-  isFavourite(movie:any): boolean{
+  isFavourite(movie: Movie): boolean{
     return this.favService.isFavourite(movie);
   }
 
@@ -69,9 +70,9 @@ export class HomePage {
     this.router.navigate(['/favourites']);
   }
 
-  openMovie(movie: any) {
+  openMovie(movie: Movie) {
     this.mds.set("movieId", movie.id);
-    console.log("Saved ID: ", movie.id, movie.name);
+    console.log("Saved ID: ", movie.id);
     this.router.navigate(['/movie-details', movie.id]);
   }
 }

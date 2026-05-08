@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonText } from '@ionic/angular/standalone';
 import { FavouritesService } from '../services/favourites-service';
 import { Router } from '@angular/router';
+import { Movie } from '../models/movie.model';
 
 @Component({
   selector: 'app-favourites',
@@ -14,9 +15,9 @@ import { Router } from '@angular/router';
 })
 export class FavouritesPage implements OnInit {
 
-  favourites: any[] = [];
+  favourites: Movie[] = [];
 
-  constructor(private favService: FavouritesService, private router:Router) {
+  constructor(private favService: FavouritesService, private router: Router) {
    }
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class FavouritesPage implements OnInit {
     this.favourites = this.favService.favourites;
   }
 
-  async toggleFavourite(movie:any){
+  async toggleFavourite(movie: Movie){
     await this.favService.addRemoveFavourites(movie);
     this.loadFavourites();
   }
@@ -38,7 +39,7 @@ export class FavouritesPage implements OnInit {
     this.router.navigate(['/']);
   }
 
-  openMovie(movie:any){
+  openMovie(movie: Movie){
     this.router.navigate(['/movie-details', movie.id]);
   }
 }

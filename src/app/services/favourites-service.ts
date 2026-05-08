@@ -6,7 +6,7 @@ import { Movie } from '../models/movie.model';
   providedIn: 'root',
 })
 export class FavouritesService {
-  favourites: any[] = [];
+  favourites: Movie[] = [];
 
   constructor(private mds: MyDataService) { }
 
