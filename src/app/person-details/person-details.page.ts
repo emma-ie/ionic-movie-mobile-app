@@ -6,6 +6,7 @@ import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Movie } from '../models/movie.model';
 
 @Component({
   selector: 'app-person-details',
@@ -17,7 +18,7 @@ import { environment } from 'src/environments/environment';
 export class PersonDetailsPage implements OnInit {
 
   person: any;
-  movies: any[] = [];
+  movies: Movie[] = [];
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private router: Router) {
   }

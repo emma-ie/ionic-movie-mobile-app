@@ -7,6 +7,7 @@ import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 import { FavouritesService } from '../services/favourites-service';
 import { environment } from 'src/environments/environment';
+import { Movie } from '../models/movie.model';
 
 @Component({
   selector: 'app-movie-details',
@@ -17,7 +18,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MovieDetailsPage implements OnInit {
 
-  movie: any;
+  movie!: Movie;
   cast: any[] = [];
   crew: any[] = [];
   favourites: any[] = [];

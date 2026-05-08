@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MyDataService } from './my-data-service';
+import { Movie } from '../models/movie.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class FavouritesService {
     return this.favourites;
   }
 
-  isFavourite(movie: any): boolean {
+  isFavourite(movie: Movie): boolean {
     if (!movie || !movie.id) {
       return false;
     }
@@ -36,7 +37,7 @@ export class FavouritesService {
     return false;
   }
 
-  async addRemoveFavourites(movie: any) {
+  async addRemoveFavourites(movie: Movie) {
     let exists = this.isFavourite(movie);
 
     if (exists) {
