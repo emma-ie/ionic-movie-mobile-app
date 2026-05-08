@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
 import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 
@@ -10,7 +10,7 @@ import { MyHttpService } from '../services/my-http-service';
   templateUrl: './person-details.page.html',
   styleUrls: ['./person-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent]
 })
 export class PersonDetailsPage implements OnInit {
 
@@ -21,6 +21,9 @@ export class PersonDetailsPage implements OnInit {
   constructor(private mds: MyDataService, private mhs: MyHttpService) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter(){
     this.loadPerson();
   }
 
