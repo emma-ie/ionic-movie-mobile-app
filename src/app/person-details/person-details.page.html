@@ -12,7 +12,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <img *ngIf="person?.profile_path" [src]="'https://image.tmdb.org/t/p/w300' + person.profile_path">
+    <img *ngIf="person?.profile_path" [src]="'https://image.tmdb.org/t/p/w300' + person.profile_path" class="person-img">
     <p *ngIf="!person?.profile_path">
       <i>No image</i>
     </p>
@@ -43,7 +43,7 @@
 
         <ion-img slot="end" *ngIf="m.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + m.poster_path">
         </ion-img>
-        <p *ngIf="!m.poster_path">
+        <p slot="end" *ngIf="!m.poster_path">
           <i>No image</i>
         </p>
       </ion-item>

@@ -29,6 +29,9 @@ export class MoviesPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+  
+  ionViewWillEnter(){
     this.getKeyword();
     this.loadFavourites();
   }

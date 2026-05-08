@@ -20,21 +20,24 @@ export class HomePage {
 
   studentNum: string = "G00474347";
   keyword: string = "";
-  apiKey:string = "71a8936961cc7f72bb39f09894041612";
   movies:any[] = [];
   favourites:any[] = [];
+  apiKey:string = "71a8936961cc7f72bb39f09894041612";
   
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService) {
     addIcons({ heart, heartOutline });
   }
 
   ngOnInit(){
-    console.log("This is oninit");
+  }
+
+  ionViewWillEnter(){
     this.loadTrendingMovies();
   }
 
   async loadTrendingMovies(){
-    console.log("Loading trending");
+    console.log("Loading trending movies");
+
     const options: HttpOptions = {
       url: "https://api.themoviedb.org/3/trending/movie/day?api_key=" + this.apiKey
     }
@@ -69,7 +72,9 @@ export class HomePage {
     this.router.navigate(['/favourites']);
   }
 
-  openMovie(movie:any){
+  openMovie(movie: any) {
+    this.mds.set("movieId", movie.id);
+    console.log("Saved ID: ", movie.id, movie.name);
     this.router.navigate(['/movie-details', movie.id]);
   }
 }

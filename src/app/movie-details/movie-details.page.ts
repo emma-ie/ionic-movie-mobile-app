@@ -33,6 +33,9 @@ export class MovieDetailsPage implements OnInit {
     this.loadMovie();
   }
 
+  ionViewWillEnter(){
+  }
+
   async loadMovie() {
     console.log("loadMovie called");
 
