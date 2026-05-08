@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonItem, IonList, IonLabel, IonImg } from '@ionic/angular/standalone';
 import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
+import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { heart, heartOutline, homeOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-person-details',
   templateUrl: './person-details.page.html',
   styleUrls: ['./person-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonItem, IonList, IonLabel, IonImg]
 })
 export class PersonDetailsPage implements OnInit {
 
@@ -18,12 +21,14 @@ export class PersonDetailsPage implements OnInit {
   movies: any[] = [];
   apiKey: string = "71a8936961cc7f72bb39f09894041612";
 
-  constructor(private mds: MyDataService, private mhs: MyHttpService) { }
+  constructor(private mds: MyDataService, private mhs: MyHttpService, private router: Router) {
+    addIcons({ heart, heartOutline, homeOutline });
+  }
 
   ngOnInit() {
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.loadPerson();
   }
 
@@ -44,5 +49,13 @@ export class PersonDetailsPage implements OnInit {
     let movieRes = await this.mhs.get(movieOptions);
     this.movies = movieRes.data.cast;
 
+  }
+
+  goToFavourites() {
+    this.router.navigate(['/favourites']);
+  }
+
+  goHome() {
+    this.router.navigate(['/']);
   }
 }
