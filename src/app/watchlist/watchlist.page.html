@@ -5,7 +5,8 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     
-    <ion-title>Favourite Movies</ion-title>
+    <ion-title>Watchlist</ion-title>
+
     <ion-button (click)="goHome()" slot="secondary" fill="clear">
       <ion-icon name="home-outline"></ion-icon>
     </ion-button>
@@ -18,23 +19,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-text *ngIf="favourites.length === 0">
-    <h1>No favourites added yet.</h1>
+
+  <ion-text *ngIf="movies.length === 0">
+    <h1>No movies in watchlist yet.</h1>
   </ion-text>
 
-  <ion-card *ngFor="let movie of favourites">
+  <ion-card *ngFor="let movie of movies">
     <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" (click)="openMovie(movie)"/>
 
     <ion-card-header>
+
       <ion-card-title>{{ movie.title }}</ion-card-title>
+
       <ion-card-subtitle>{{ movie.release_date }}</ion-card-subtitle>
+
       {{ movie.overview }}
+
     </ion-card-header>
 
     <ion-card-content>
-      <ion-button (click)="toggleFavourite(movie)" expand="block" shape="round">
-        <ion-icon name='heart'></ion-icon>
-        Unfavourite
+
+      <ion-button (click)="toggleWatchlist(movie)" expand="block" shape="round">
+        <ion-icon name='bookmark'></ion-icon>
+        Remove from watchlist
       </ion-button>
       
     </ion-card-content>

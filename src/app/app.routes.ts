@@ -29,5 +29,9 @@ export const routes: Routes = [
     path: 'upcoming-movies',
     loadComponent: () => import('./upcoming-movies/upcoming-movies.page').then( m => m.UpcomingMoviesPage)
   },
+  {
+    path: 'watchlist',
+    loadComponent: () => import('./watchlist/watchlist.page').then( m => m.WatchlistPage)
+  },
 
 ];
