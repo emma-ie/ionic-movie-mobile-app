@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>{{ person.name }} Details</ion-title>
+    <ion-title>{{ person?.name }} Details</ion-title>
     <ion-button (click)="goToFavourites()" slot="end" fill="clear">
       <ion-icon color="danger" name="heart-outline"></ion-icon>
     </ion-button>
@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card *ngIf="person">
     <img *ngIf="person?.profile_path" [src]="'https://image.tmdb.org/t/p/w300' + person.profile_path"
       class="person-img">
     <p *ngIf="!person?.profile_path">
@@ -20,18 +20,18 @@
 
     <ion-card-header>
       <ion-card-title>
-        {{ person.name }}
+        {{ person?.name }}
 
         <span *ngIf="person.also_known_as?.length">
           AKA {{ person.also_known_as?.[0] }}
         </span>
       </ion-card-title>
-      <ion-card-subtitle *ngIf="person?.birthday">{{ person.birthday }} <span *ngIf="person?.deathday">to {{
-          person.deathday }}</span>
+      <ion-card-subtitle *ngIf="person?.birthday">{{ person?.birthday }} <span *ngIf="person?.deathday">to {{
+          person?.deathday }}</span>
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      {{ person.biography }}
+      {{ person?.biography }}
     </ion-card-content>
   </ion-card>
 

@@ -19,7 +19,7 @@ import { Person } from '../models/person.model';
 })
 export class MovieDetailsPage implements OnInit {
 
-  movie: Movie;
+  movie?: Movie;
   cast: Person[] = [];
   crew: Person[] = [];
   favourites: Movie[] = [];

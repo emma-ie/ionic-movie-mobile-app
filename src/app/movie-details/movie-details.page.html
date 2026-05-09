@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>{{ movie.title }}</ion-title>
+    <ion-title>{{ movie?.title }}</ion-title>
     <ion-button (click)="goToFavourites()" slot="end" fill="clear">
       <ion-icon color="danger" name="heart-outline"></ion-icon>
     </ion-button>
@@ -13,14 +13,14 @@
 <ion-content [fullscreen]="true">
 
   <!-- Movie overview -->
-  <ion-card>
+  <ion-card *ngIf="movie">
     <ion-card-header>
-      <ion-card-title>{{ movie.title }}</ion-card-title>
-      <ion-card-subtitle>{{ movie.release_date }}</ion-card-subtitle>
+      <ion-card-title>{{ movie?.title }}</ion-card-title>
+      <ion-card-subtitle>{{ movie?.release_date }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      {{ movie.overview }}
+      {{ movie?.overview }}
     </ion-card-content>
     <ion-button (click)="toggleFavourite(movie)" class="fav-button">
       <ion-icon class="fav-icon" [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
