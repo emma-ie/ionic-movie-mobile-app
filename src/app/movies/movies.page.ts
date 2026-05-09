@@ -9,6 +9,7 @@ import { FavouritesService } from '../services/favourites-service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Movie } from '../models/movie.model';
+import { WatchlistService } from '../services/watchlist-service';
 
 @Component({
   selector: 'app-movies',
@@ -22,14 +23,15 @@ export class MoviesPage implements OnInit {
   keyword: string = "";
   movies: Movie[] = [];
   favourites: Movie[] = [];
+  watchlistMovies: Movie[] = [];
 
-  constructor(private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService, private router: Router) {
+  constructor(private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService, private router: Router, private watchlist: WatchlistService) {
   }
 
   ngOnInit() {
   }
-  
-  ionViewWillEnter(){
+
+  ionViewWillEnter() {
     this.getKeyword();
     this.loadFavourites();
   }
@@ -59,6 +61,19 @@ export class MoviesPage implements OnInit {
     return this.favService.isFavourite(movie);
   }
 
+  async toggleWatchlist(movie: Movie) {
+    await this.watchlist.addRemoveWatchlist(movie);
+    this.loadWatchlist();
+  }
+
+  async loadWatchlist() {
+    this.watchlistMovies = await this.watchlist.getWatchlist();
+  }
+
+  isInWatchlist(movie: Movie): boolean {
+    return this.watchlist.isInWatchlist(movie);
+  }
+
   goToFavourites() {
     this.router.navigate(['/favourites']);
   }
@@ -67,7 +82,7 @@ export class MoviesPage implements OnInit {
     this.router.navigate(['/']);
   }
 
-  goNewMovies(){
+  goNewMovies() {
     this.router.navigate(['/upcoming-movies']);
   }
 

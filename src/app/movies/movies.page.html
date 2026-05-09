@@ -32,9 +32,15 @@
         <ion-icon [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
         {{ isFavourite(movie) ? 'Unfavourite' : 'Favourite' }}
       </ion-button>
+
       <ion-button (click)="openMovie(movie)">
          View Details
       </ion-button>
+      
+      <ion-button (click)="toggleWatchlist(movie)">
+        <ion-icon [name]="isInWatchlist(movie) ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+      </ion-button>
+
     </ion-card-content>
   </ion-card>
 </ion-content>

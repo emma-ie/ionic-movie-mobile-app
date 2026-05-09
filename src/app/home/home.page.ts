@@ -9,6 +9,7 @@ import { FavouritesService } from '../services/favourites-service';
 import { MyHttpService } from '../services/my-http-service';
 import { environment } from 'src/environments/environment';
 import { Movie } from '../models/movie.model';
+import { WatchlistService } from '../services/watchlist-service';
 
 @Component({
   selector: 'app-home',
@@ -22,8 +23,9 @@ export class HomePage {
   keyword: string = "";
   movies: Movie[] = [];
   favourites: Movie[] = [];
+  watchlistMovies: Movie[] = [];
   
-  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService) {
+  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService, private watchlist: WatchlistService) {
   }
 
   ngOnInit(){
@@ -64,6 +66,19 @@ export class HomePage {
 
   isFavourite(movie: Movie): boolean{
     return this.favService.isFavourite(movie);
+  }
+
+  async toggleWatchlist(movie: Movie){
+    await this.watchlist.addRemoveWatchlist(movie);
+    this.loadWatchlist();
+  }
+
+  async loadWatchlist(){
+    this.watchlistMovies = await this.watchlist.getWatchlist();
+  }
+
+  isInWatchlist(movie: Movie): boolean{
+    return this.watchlist.isInWatchlist(movie);
   }
 
   goToFavourites(){
