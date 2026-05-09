@@ -18,7 +18,7 @@ import { Person } from '../models/person.model';
 })
 export class PersonDetailsPage implements OnInit {
 
-  person!: Person;
+  person?: Person;
   movies: Movie[] = [];
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private router: Router) {

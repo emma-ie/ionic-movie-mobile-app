@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Upcoming Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h4>Upcoming Movies</h4>
+  <ion-card *ngFor="let movie of movies" button="true" (click)="openMovie(movie)">
+    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+    <ion-card-header>
+      <ion-card-title>{{ movie?.title }}</ion-card-title>
+      <ion-card-subtitle>{{ movie?.release_date }}</ion-card-subtitle>
+      <ion-button (click)="toggleFavourite(movie)">
+        <ion-icon [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
+      </ion-button>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ movie?.overview }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
