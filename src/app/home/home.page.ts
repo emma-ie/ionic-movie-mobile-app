@@ -23,7 +23,6 @@ export class HomePage {
   keyword: string = "";
   movies: Movie[] = [];
   favourites: Movie[] = [];
-  watchlistMovies: Movie[] = [];
   
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService, private watchlist: WatchlistService) {
   }
@@ -70,11 +69,6 @@ export class HomePage {
 
   async toggleWatchlist(movie: Movie){
     await this.watchlist.addRemoveWatchlist(movie);
-    this.loadWatchlist();
-  }
-
-  async loadWatchlist(){
-    this.watchlistMovies = await this.watchlist.getWatchlist();
   }
 
   isInWatchlist(movie: Movie): boolean{

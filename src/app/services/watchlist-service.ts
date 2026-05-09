@@ -28,8 +28,9 @@ export class WatchlistService {
     }
 
     for (let i = 0; i < this.watchlist.length; i++) {
+      let item = this.watchlist[i];
 
-      if (this.watchlist[i].id === movie.id){
+      if (item && item.id === movie.id){
         return true;
       }
     }
@@ -37,6 +38,7 @@ export class WatchlistService {
   }
 
   async addRemoveWatchlist(movie: Movie) {
+
     let exists = this.isInWatchlist(movie);
 
     if (exists) {

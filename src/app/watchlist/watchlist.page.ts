@@ -23,7 +23,7 @@ export class WatchlistPage implements OnInit {
   ngOnInit() {
   }
 
-  async onViewWillEnter(){
+  async ionViewWillEnter(){
     this.movies = await this.watchlist.getWatchlist();
   }
 
