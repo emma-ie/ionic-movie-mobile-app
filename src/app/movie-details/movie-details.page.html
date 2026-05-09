@@ -2,26 +2,30 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
-    </ion-buttons>
 
+      <ion-button (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+    
     <ion-title>{{ movie?.title }}</ion-title>
 
-    <ion-button (click)="goToFavourites()" slot="end" fill="clear">
-      <ion-icon color="danger" name="heart-outline"></ion-icon>
-    </ion-button>
+    <ion-buttons slot="end">
+      
+      <ion-button (click)="goToFavourites()">
+        <ion-icon color="danger" name="heart-outline"></ion-icon>
+      </ion-button>
+    
+      <ion-button (click)="goNewMovies()">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
+      
+      <ion-button (click)="goWatchlist()">
+        <ion-icon name="bookmark-outline"></ion-icon>
+      </ion-button>
 
-    <ion-button (click)="goHome()" slot="start" fill="clear">
-      <ion-icon name="home-outline"></ion-icon>
-    </ion-button>
-
-    <ion-button (click)="goNewMovies()" slot="primary" fill="clear">
-      <ion-icon name="calendar-outline"></ion-icon>
-    </ion-button>
-
-    <ion-button (click)="goWatchlist()" slot="secondary" fill="clear">
-      <ion-icon name="bookmark-outline"></ion-icon>
-    </ion-button>
-
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

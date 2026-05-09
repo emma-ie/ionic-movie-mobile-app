@@ -1,23 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-     
-    <ion-buttons slot="start">
+
+    <ion-buttons slot="start" fill="clear">
       <ion-back-button></ion-back-button>
+
+      <ion-button (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    
+
     <ion-title>Favourite Movies</ion-title>
-    <ion-button (click)="goHome()" slot="start" fill="clear">
-      <ion-icon name="home-outline"></ion-icon>
-    </ion-button>
 
-    <ion-button (click)="goNewMovies()" slot="primary" fill="clear">
-      <ion-icon name="calendar-outline"></ion-icon>
-    </ion-button>
+    <ion-buttons slot="end">
 
-    <ion-button (click)="goWatchlist()" slot="end" fill="clear">
-      <ion-icon name="bookmark-outline"></ion-icon>
-    </ion-button>
+      <ion-button (click)="goNewMovies()">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
 
+      <ion-button (click)="goWatchlist()">
+        <ion-icon name="bookmark-outline"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +31,7 @@
   </ion-text>
 
   <ion-card *ngFor="let movie of favourites">
-    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" (click)="openMovie(movie)"/>
+    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" (click)="openMovie(movie)" />
 
     <ion-card-header>
       <ion-card-title>{{ movie.title }}</ion-card-title>
