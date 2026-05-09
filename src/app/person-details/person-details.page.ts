@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonItem, IonList, IonLabel, IonImg } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonItem, IonList, IonLabel, IonImg, IonButtons, IonBackButton } from '@ionic/angular/standalone';
 import { MyDataService } from '../services/my-data-service';
 import { MyHttpService } from '../services/my-http-service';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { Person } from '../models/person.model';
   templateUrl: './person-details.page.html',
   styleUrls: ['./person-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonItem, IonList, IonLabel, IonImg]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonItem, IonList, IonLabel, IonImg, IonButtons, IonBackButton]
 })
 export class PersonDetailsPage implements OnInit {
 
@@ -60,5 +60,11 @@ export class PersonDetailsPage implements OnInit {
 
   goNewMovies(){
     this.router.navigate(['/upcoming-movies']);
+  }
+
+  openMovie(movie: Movie) {
+    this.mds.set("movieId", movie.id);
+    console.log("Saved ID: ", movie.id);
+    this.router.navigate(['/movie-details', movie.id]);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton } from '@ionic/angular/standalone';
 import { Movie } from '../models/movie.model';
 import { MyHttpService } from '../services/my-http-service';
 import { MyDataService } from '../services/my-data-service';
@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './upcoming-movies.page.html',
   styleUrls: ['./upcoming-movies.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton]
 })
 export class UpcomingMoviesPage implements OnInit {
 
@@ -54,7 +54,7 @@ export class UpcomingMoviesPage implements OnInit {
   goToFavourites() {
     this.router.navigate(['/favourites']);
   }
-  
+
   goHome() {
     this.router.navigate(['/']);
   }

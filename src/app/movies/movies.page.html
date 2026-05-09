@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Movies</ion-title>
     <ion-button (click)="goToFavourites()" slot="end" fill="clear">
       <ion-icon color="danger" name="heart-outline"></ion-icon>
