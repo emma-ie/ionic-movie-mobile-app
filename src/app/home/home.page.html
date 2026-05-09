@@ -6,12 +6,16 @@
     <ion-button (click)="goToFavourites()" slot="end" fill="clear">
       <ion-icon color="danger" name="heart-outline"></ion-icon>
     </ion-button>
+    <ion-button (click)="goNewMovies()" slot="primary" fill="clear">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-input label="Search" placeholder="Enter movie name" [(ngModel)]="keyword"></ion-input>
   <ion-button (click)="searchMovies()" expand="block" shape="round">Search</ion-button>
+  
   <h4>Today's Trending Movies</h4>
   <ion-card *ngFor="let movie of movies">
     <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" (click)="openMovie(movie)"/>

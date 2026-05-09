@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>My Favourite Movies</ion-title>
-    <ion-button (click)="goHome()" slot="end" fill="clear">
+    <ion-button (click)="goHome()" slot="secondary" fill="clear">
       <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="goNewMovies()" slot="primary" fill="clear">
+      <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -13,17 +16,18 @@
   </ion-text>
 
   <ion-card *ngFor="let movie of favourites">
-    <img (click)="openMovie(movie)" alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" (click)="openMovie(movie)" />
     <ion-card-header>
-      <ion-card-title (click)="openMovie(movie)">{{movie.title}}</ion-card-title>
-      <ion-card-subtitle>{{movie.release_date}}</ion-card-subtitle>
-      <ion-button (click)="toggleFavourite(movie)">
-        <ion-icon name='heart'></ion-icon>
-      </ion-button>
+      <ion-card-title>{{ movie.title }}</ion-card-title>
+      <ion-card-subtitle>{{ movie.release_date }}</ion-card-subtitle>
+      {{movie.overview}}
     </ion-card-header>
 
     <ion-card-content>
-      {{movie.overview}}
+      <ion-button (click)="toggleFavourite(movie)" expand="block" shape="round">
+        <ion-icon name='heart'></ion-icon>
+        Unfavourite
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

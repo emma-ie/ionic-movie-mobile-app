@@ -57,4 +57,8 @@ export class PersonDetailsPage implements OnInit {
   goHome() {
     this.router.navigate(['/']);
   }
+
+  goNewMovies(){
+    this.router.navigate(['/upcoming-movies']);
+  }
 }

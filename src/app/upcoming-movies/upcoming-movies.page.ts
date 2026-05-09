@@ -54,6 +54,10 @@ export class UpcomingMoviesPage implements OnInit {
   goToFavourites() {
     this.router.navigate(['/favourites']);
   }
+  
+  goHome() {
+    this.router.navigate(['/']);
+  }
 
   openMovie(movie: Movie) {
     this.mds.set("movieId", movie.id);

@@ -32,7 +32,7 @@ export class MovieDetailsPage implements OnInit {
     this.loadMovie();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
   }
 
   async loadMovie() {
@@ -87,11 +87,14 @@ export class MovieDetailsPage implements OnInit {
     this.router.navigate(['/']);
   }
 
+  goNewMovies(){
+    this.router.navigate(['/upcoming-movies']);
+  }
+
   buttonText(movie: Movie) {
     if (this.isFavourite(movie)) {
       return "Remove from Favourites";
     }
-
     return "Add to Favourites";
   }
 

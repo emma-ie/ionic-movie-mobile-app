@@ -70,6 +70,10 @@ export class HomePage {
     this.router.navigate(['/favourites']);
   }
 
+  goNewMovies(){
+    this.router.navigate(['/upcoming-movies']);
+  }
+
   openMovie(movie: Movie) {
     this.mds.set("movieId", movie.id);
     console.log("Saved ID: ", movie.id);

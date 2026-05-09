@@ -42,4 +42,8 @@ export class FavouritesPage implements OnInit {
   openMovie(movie: Movie){
     this.router.navigate(['/movie-details', movie.id]);
   }
+
+  goNewMovies(){
+    this.router.navigate(['/upcoming-movies']);
+  }
 }
