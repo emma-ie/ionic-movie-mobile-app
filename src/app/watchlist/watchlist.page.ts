@@ -45,4 +45,8 @@ export class WatchlistPage implements OnInit {
   goNewMovies(){
     this.router.navigate(['/upcoming-movies']);
   }
+
+  goToFavourites() {
+    this.router.navigate(['/favourites']);
+  }
 }

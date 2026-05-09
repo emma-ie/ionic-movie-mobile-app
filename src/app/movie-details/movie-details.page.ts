@@ -90,6 +90,10 @@ export class MovieDetailsPage implements OnInit {
   goNewMovies(){
     this.router.navigate(['/upcoming-movies']);
   }
+  
+  goWatchlist(){
+    this.router.navigate(['/watchlist']);
+  }
 
   buttonText(movie: Movie) {
     if (this.isFavourite(movie)) {

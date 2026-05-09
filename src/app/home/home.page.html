@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-   
+
     <ion-title>
       {{ studentNum }}
     </ion-title>
@@ -13,6 +13,10 @@
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
 
+    <ion-button (click)="goWatchlist()" slot="secondary" fill="clear">
+      <ion-icon name="bookmark-outline"></ion-icon>
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
 
@@ -22,7 +26,7 @@
 
   <h4>Today's Trending Movies</h4>
   <ion-card *ngFor="let movie of movies">
-    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" (click)="openMovie(movie)"/>
+    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" (click)="openMovie(movie)" />
 
     <ion-card-header>
       <ion-card-title>{{ movie?.title }}</ion-card-title>

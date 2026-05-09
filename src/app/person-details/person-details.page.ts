@@ -62,6 +62,10 @@ export class PersonDetailsPage implements OnInit {
     this.router.navigate(['/upcoming-movies']);
   }
 
+  goWatchlist(){
+    this.router.navigate(['/watchlist']);
+  }
+
   openMovie(movie: Movie) {
     this.mds.set("movieId", movie.id);
     console.log("Saved ID: ", movie.id);
