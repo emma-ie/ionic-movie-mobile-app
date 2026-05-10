@@ -43,7 +43,7 @@ export class UpcomingMoviesPage implements OnInit {
       } else {
         this.movies = [];
       }
-      
+
     }
     catch (error) {
       console.log("Error loading upcoming movies: ", error);

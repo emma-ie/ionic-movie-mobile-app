@@ -10,6 +10,8 @@ import { MyHttpService } from '../services/my-http-service';
 import { environment } from 'src/environments/environment';
 import { Movie } from '../models/movie.model';
 import { WatchlistService } from '../services/watchlist-service';
+import { addIcons } from 'ionicons';
+import { diceOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,7 @@ export class HomePage {
   favourites: Movie[] = [];
 
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService, private watchlist: WatchlistService) {
+    addIcons({diceOutline});
   }
 
   ngOnInit() {
@@ -32,6 +35,18 @@ export class HomePage {
 
   ionViewWillEnter() {
     this.loadTrendingMovies();
+  }
+
+  getRandomMovie(){
+    if (!this.movies || this.movies.length ===0 ){
+      return;
+    }
+
+    // Random index: https://www.w3schools.com/js/js_random.asp
+    const randomIndex = Math.floor(Math.random() * this.movies.length);
+    const movie = this.movies[randomIndex];
+
+    this.openMovie(movie);
   }
 
   async loadTrendingMovies() {

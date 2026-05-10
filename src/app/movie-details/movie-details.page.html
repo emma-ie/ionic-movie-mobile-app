@@ -8,19 +8,19 @@
       </ion-button>
 
     </ion-buttons>
-    
+
     <ion-title>{{ movie?.title }}</ion-title>
 
     <ion-buttons slot="end">
-      
+
       <ion-button (click)="goToFavourites()">
         <ion-icon color="danger" name="heart-outline"></ion-icon>
       </ion-button>
-    
+
       <ion-button (click)="goNewMovies()">
         <ion-icon name="calendar-outline"></ion-icon>
       </ion-button>
-      
+
       <ion-button (click)="goWatchlist()">
         <ion-icon name="bookmark-outline"></ion-icon>
       </ion-button>
@@ -33,6 +33,7 @@
 
   <!-- Movie overview -->
   <ion-card *ngIf="movie">
+    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"/>
     <ion-card-header>
       <ion-card-title>{{ movie.title }}</ion-card-title>
       <ion-card-subtitle>{{ movie.release_date }}</ion-card-subtitle>
@@ -43,12 +44,12 @@
     </ion-card-content>
 
     <ion-button (click)="toggleFavourite(movie)" shape="round" class="fav-button">
-      <ion-icon class="fav-icon" [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
+      <ion-icon slot="start" color="danger" class="fav-icon"
+        [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
       {{ buttonText(movie) }}
     </ion-button>
 
   </ion-card>
-
 
   <!-- Cast information -->
   <ion-card>
@@ -59,7 +60,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let c of cast" button="true" (click)="openPerson(c)">
-          <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w200/' + c.profile_path" />
+          <img alt="Headshot image" [src]="'https://image.tmdb.org/t/p/w154/' + c.profile_path" />
           <ion-label>
             <h2>{{ c.name }} as {{ c.character }}</h2>
           </ion-label>

@@ -1,4 +1,4 @@
-export interface Person{
+export interface Person {
     id: number;
     name: string;
     also_known_as?: string[];

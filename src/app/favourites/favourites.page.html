@@ -26,6 +26,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
   <ion-text *ngIf="favourites.length === 0">
     <h1>No favourites added yet.</h1>
   </ion-text>
@@ -34,6 +35,7 @@
     <ion-row>
       <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let fav of favourites">
         <ion-card>
+
           <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + fav.poster_path"
             (click)="openMovie(fav)" />
 
@@ -50,8 +52,8 @@
             </ion-button>
 
             <ion-button (click)="toggleFavourite(fav)" fill="outline" shape="round">
-              <ion-icon name='heart'></ion-icon>
-              Unfavourite
+              <ion-icon slot="start" color="danger" name='heart'></ion-icon>
+              Remove
             </ion-button>
 
           </ion-card-content>

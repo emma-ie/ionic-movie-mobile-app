@@ -18,7 +18,7 @@ export class WatchlistPage {
 
   movies: Movie[] = [];
 
-  constructor(private watchlist: WatchlistService, private router: Router, private mds: MyDataService) {}
+  constructor(private watchlist: WatchlistService, private router: Router, private mds: MyDataService) { }
 
   async ionViewWillEnter() {
     try {

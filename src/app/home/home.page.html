@@ -24,12 +24,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-input label="Search" placeholder="Enter movie name" [(ngModel)]="keyword"></ion-input>
-  <ion-button (click)="searchMovies()" expand="block" shape="round">Search</ion-button>
+
+    <ion-button (click)="searchMovies()" shape="round">Search all movies</ion-button>
+
+    <ion-button (click)="getRandomMovie()" shape="round">
+      <ion-icon name="dice-outline" fill="outline" slot="start"></ion-icon>
+      Roll the dice
+    </ion-button>
 
   <h4>Today's Trending Movies</h4>
 
-  <p *ngIf=""movies.length === 0>No movies could be loaded.</p>
+  <p *ngIf="" movies.length===0>No movies could be loaded.</p>
 
   <ion-grid>
     <ion-row>
@@ -44,7 +51,7 @@
           </ion-card-header>
 
           <p class="overview">{{ movie?.overview }}</p>
-          <ion-card-content class="buttons">
+          <ion-card-content>
 
             <ion-button shape="round" (click)="openMovie(movie)">
               View Details
