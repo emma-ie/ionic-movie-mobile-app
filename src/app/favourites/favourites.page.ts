@@ -18,36 +18,36 @@ export class FavouritesPage implements OnInit {
   favourites: Movie[] = [];
 
   constructor(private favService: FavouritesService, private router: Router) {
-   }
+  }
 
   ngOnInit() {
     this.loadFavourites();
   }
 
-  async loadFavourites(){
+  async loadFavourites() {
+    console.log("Loading favourites");
     await this.favService.getFavourites();
-
     this.favourites = this.favService.favourites;
   }
 
-  async toggleFavourite(movie: Movie){
+  async toggleFavourite(movie: Movie) {
     await this.favService.addRemoveFavourites(movie);
     this.loadFavourites();
   }
 
-  goHome(){
+  goHome() {
     this.router.navigate(['/']);
   }
 
-  openMovie(movie: Movie){
+  openMovie(movie: Movie) {
     this.router.navigate(['/movie-details', movie.id]);
   }
 
-  goNewMovies(){
+  goNewMovies() {
     this.router.navigate(['/upcoming-movies']);
   }
-  
-  goWatchlist(){
+
+  goWatchlist() {
     this.router.navigate(['/watchlist']);
   }
 }

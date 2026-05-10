@@ -16,7 +16,7 @@ import { Person } from '../models/person.model';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon, IonItem, IonList, IonLabel, IonImg, IonButtons, IonBackButton]
 })
-export class PersonDetailsPage implements OnInit {
+export class PersonDetailsPage {
 
   person?: Person;
   movies: Movie[] = [];
@@ -24,30 +24,39 @@ export class PersonDetailsPage implements OnInit {
   constructor(private mds: MyDataService, private mhs: MyHttpService, private router: Router) {
   }
 
-  ngOnInit() {
-  }
-
   ionViewDidEnter() {
     this.loadPerson();
   }
 
   async loadPerson() {
-    let id = await this.mds.get("personId");
+    try {
+      let id = await this.mds.get("personId");
 
-    const personOptions = {
-      url: "https://api.themoviedb.org/3/person/" + id + "?api_key=" + environment.apiKey
-    };
+      if (!id) {
+        console.log("No person ID found");
+        this.person = undefined;
+        this.movies = [];
+        return;
+      }
 
-    let personRes = await this.mhs.get(personOptions);
-    this.person = personRes.data;
+      const personOptions = {
+        url: "https://api.themoviedb.org/3/person/" + id + "?api_key=" + environment.apiKey
+      };
 
-    const movieOptions = {
-      url: "https://api.themoviedb.org/3/person/" + id + "/movie_credits?api_key=" + environment.apiKey
-    };
+      let personRes = await this.mhs.get(personOptions);
+      this.person = personRes?.data;
 
-    let movieRes = await this.mhs.get(movieOptions);
-    this.movies = movieRes.data.cast;
+      const movieOptions = {
+        url: "https://api.themoviedb.org/3/person/" + id + "/movie_credits?api_key=" + environment.apiKey
+      };
 
+      let movieRes = await this.mhs.get(movieOptions);
+      this.movies = movieRes?.data?.cast || [];
+    } catch (error) {
+      console.log("Error loading person details: ", error);
+      this.person = undefined;
+      this.movies = [];
+    }
   }
 
   goToFavourites() {
@@ -58,11 +67,11 @@ export class PersonDetailsPage implements OnInit {
     this.router.navigate(['/']);
   }
 
-  goNewMovies(){
+  goNewMovies() {
     this.router.navigate(['/upcoming-movies']);
   }
 
-  goWatchlist(){
+  goWatchlist() {
     this.router.navigate(['/watchlist']);
   }
 

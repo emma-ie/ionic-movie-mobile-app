@@ -11,15 +11,21 @@ export class FavouritesService {
   constructor(private mds: MyDataService) { }
 
   async getFavourites() {
-    let favourites = await this.mds.get("favourites");
+    try {
+      let favourites = await this.mds.get("favourites");
 
-    if (favourites) {
-      this.favourites = JSON.parse(favourites);
-    } else {
+      if (favourites) {
+        this.favourites = JSON.parse(favourites);
+      } else {
+        this.favourites = [];
+      }
+
+      return this.favourites;
+    } catch (error) {
+      console.log("Error loading favourites: ", error);
       this.favourites = [];
+      return [];
     }
-
-    return this.favourites;
   }
 
   isFavourite(movie: Movie): boolean {
@@ -38,22 +44,27 @@ export class FavouritesService {
   }
 
   async addRemoveFavourites(movie: Movie) {
-    let exists = this.isFavourite(movie);
+    try {
 
-    if (exists) {
-      let newFavourites = [];
+      let exists = this.isFavourite(movie);
 
-      for (let i = 0; i < this.favourites.length; i++) {
-        if (this.favourites[i].id !== movie.id) {
-          newFavourites.push(this.favourites[i]);
+      if (exists) {
+        let newFavourites = [];
+
+        for (let i = 0; i < this.favourites.length; i++) {
+          if (this.favourites[i].id !== movie.id) {
+            newFavourites.push(this.favourites[i]);
+          }
         }
+        this.favourites = newFavourites;
       }
-      this.favourites = newFavourites;
-    }
-    else {
-      this.favourites.push(movie);
-    }
+      else {
+        this.favourites.push(movie);
+      }
 
-    await this.mds.set("favourites", JSON.stringify(this.favourites));
+      await this.mds.set("favourites", JSON.stringify(this.favourites));
+    } catch (error) {
+      console.log("Error updating favourites: ", error);
+    }
   }
 }

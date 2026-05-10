@@ -47,7 +47,10 @@ export class MovieDetailsPage implements OnInit {
     };
 
     let movieRes = await this.mhs.get(movieOptions);
-    this.movie = movieRes.data;
+
+    if (movieRes && movieRes.data) {
+      this.movie = movieRes.data;
+    }
 
     const creditOptions = {
       url: "https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + environment.apiKey
@@ -55,8 +58,13 @@ export class MovieDetailsPage implements OnInit {
 
     let creditRes = await this.mhs.get(creditOptions);
 
-    this.cast = creditRes.data.cast;
-    this.crew = creditRes.data.crew;
+    if (creditRes && creditRes.data) {
+      this.cast = creditRes.data.cast;
+      this.crew = creditRes.data.crew;
+    } else {
+      this.cast = [];
+      this.crew = [];
+    }
   }
 
   openPerson(person: Person) {
@@ -72,7 +80,7 @@ export class MovieDetailsPage implements OnInit {
 
   async toggleFavourite(movie: Movie) {
     await this.favService.addRemoveFavourites(movie);
-    this.loadFavourites();
+    this.favourites = await this.favService.getFavourites();
   }
 
   isFavourite(movie: Movie): boolean {
@@ -87,11 +95,11 @@ export class MovieDetailsPage implements OnInit {
     this.router.navigate(['/']);
   }
 
-  goNewMovies(){
+  goNewMovies() {
     this.router.navigate(['/upcoming-movies']);
   }
-  
-  goWatchlist(){
+
+  goWatchlist() {
     this.router.navigate(['/watchlist']);
   }
 
@@ -101,5 +109,4 @@ export class MovieDetailsPage implements OnInit {
     }
     return "Add to Favourites";
   }
-
 }

@@ -23,7 +23,6 @@ export class MoviesPage implements OnInit {
   keyword: string = "";
   movies: Movie[] = [];
   favourites: Movie[] = [];
-  watchlistMovies: Movie[] = [];
 
   constructor(private mds: MyDataService, private mhs: MyHttpService, private favService: FavouritesService, private router: Router, private watchlist: WatchlistService) {
   }
@@ -33,7 +32,6 @@ export class MoviesPage implements OnInit {
 
   ionViewWillEnter() {
     this.getKeyword();
-    this.loadFavourites();
   }
 
   async getKeyword() {
@@ -44,17 +42,16 @@ export class MoviesPage implements OnInit {
     }
 
     let result = await this.mhs.get(options);
-    this.movies = result.data.results;
-    console.log(this.movies);
-  }
-
-  async loadFavourites() {
-    this.favourites = await this.favService.getFavourites();
+    if (result) {
+      this.movies = result.data.results;
+    } else {
+      this.movies = [];
+    }
   }
 
   async toggleFavourite(movie: Movie) {
     await this.favService.addRemoveFavourites(movie);
-    this.loadFavourites();
+
   }
 
   isFavourite(movie: Movie): boolean {
@@ -63,12 +60,8 @@ export class MoviesPage implements OnInit {
 
   async toggleWatchlist(movie: Movie) {
     await this.watchlist.addRemoveWatchlist(movie);
-    this.loadWatchlist();
   }
 
-  async loadWatchlist() {
-    this.watchlistMovies = await this.watchlist.getWatchlist();
-  }
 
   isInWatchlist(movie: Movie): boolean {
     return this.watchlist.isInWatchlist(movie);
@@ -86,7 +79,7 @@ export class MoviesPage implements OnInit {
     this.router.navigate(['/upcoming-movies']);
   }
 
-  goWatchlist(){
+  goWatchlist() {
     this.router.navigate(['/watchlist']);
   }
 

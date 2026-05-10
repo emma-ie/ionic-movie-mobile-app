@@ -11,15 +11,23 @@ export class WatchlistService {
   constructor(private mds: MyDataService) { }
 
   async getWatchlist() {
-    let watchlist = await this.mds.get("watchlist");
+    try {
+      console.log("Loading watchlist");
 
-    if (watchlist) {
-      this.watchlist = JSON.parse(watchlist);
-    } else {
+      let watchlist = await this.mds.get("watchlist");
+
+      if (watchlist) {
+        this.watchlist = JSON.parse(watchlist);
+      } else {
+        this.watchlist = [];
+      }
+
+      return this.watchlist;
+    } catch (error) {
+      console.log("Error loading watchlist: ", error);
       this.watchlist = [];
+      return [];
     }
-
-    return this.watchlist;
   }
 
   isInWatchlist(movie: Movie): boolean {
@@ -30,7 +38,7 @@ export class WatchlistService {
     for (let i = 0; i < this.watchlist.length; i++) {
       let item = this.watchlist[i];
 
-      if (item && item.id === movie.id){
+      if (item && item.id === movie.id) {
         return true;
       }
     }
@@ -38,23 +46,26 @@ export class WatchlistService {
   }
 
   async addRemoveWatchlist(movie: Movie) {
+    try {
+      let exists = this.isInWatchlist(movie);
 
-    let exists = this.isInWatchlist(movie);
+      if (exists) {
+        let newWatchlist: Movie[] = [];
 
-    if (exists) {
-      let newWatchlist: Movie[] = [];
-
-      for (let i = 0; i < this.watchlist.length; i++) {
-        if (this.watchlist[i].id !== movie.id) {
-          newWatchlist.push(this.watchlist[i]);
+        for (let i = 0; i < this.watchlist.length; i++) {
+          if (this.watchlist[i].id !== movie.id) {
+            newWatchlist.push(this.watchlist[i]);
+          }
         }
+        this.watchlist = newWatchlist;
       }
-      this.watchlist = newWatchlist;
-    }
-    else {
-      this.watchlist.push(movie);
-    }
+      else {
+        this.watchlist.push(movie);
+      }
 
-    await this.mds.set("watchlist", JSON.stringify(this.watchlist));
+      await this.mds.set("watchlist", JSON.stringify(this.watchlist));
+    } catch (error) {
+      console.log("Error updating watchlist: ", error);
+    }
   }
 }

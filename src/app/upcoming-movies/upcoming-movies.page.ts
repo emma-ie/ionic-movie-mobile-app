@@ -21,8 +21,6 @@ import { WatchlistService } from '../services/watchlist-service';
 export class UpcomingMoviesPage implements OnInit {
 
   movies: Movie[] = [];
-  favourites: Movie[] = [];
-  watchlistMovies: Movie[] = [];
 
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService, private watchlist: WatchlistService) { }
 
@@ -31,35 +29,38 @@ export class UpcomingMoviesPage implements OnInit {
   }
 
   async loadUpcomingMovies() {
-    console.log("Loading upcoming movies");
+    try {
+      console.log("Loading upcoming movies");
 
-    const options: HttpOptions = {
-      url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + environment.apiKey
+      const options: HttpOptions = {
+        url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + environment.apiKey
+      }
+
+      let result = await this.mhs.get(options);
+
+      if (result && result.data) {
+        this.movies = result.data.results;
+      } else {
+        this.movies = [];
+      }
+      
     }
-
-    let result = await this.mhs.get(options);
-    this.movies = result.data.results;
-  }
-  async loadFavourites() {
-    this.favourites = await this.favService.getFavourites();
+    catch (error) {
+      console.log("Error loading upcoming movies: ", error);
+      this.movies = [];
+    }
   }
 
   async toggleFavourite(movie: Movie) {
     await this.favService.addRemoveFavourites(movie);
-    this.loadFavourites();
   }
 
   isFavourite(movie: Movie): boolean {
     return this.favService.isFavourite(movie);
   }
 
- async toggleWatchlist(movie: Movie) {
+  async toggleWatchlist(movie: Movie) {
     await this.watchlist.addRemoveWatchlist(movie);
-    this.loadWatchlist();
-  }
-
-  async loadWatchlist() {
-    this.watchlistMovies = await this.watchlist.getWatchlist();
   }
 
   isInWatchlist(movie: Movie): boolean {
@@ -74,7 +75,7 @@ export class UpcomingMoviesPage implements OnInit {
     this.router.navigate(['/']);
   }
 
-  goWatchlist(){
+  goWatchlist() {
     this.router.navigate(['/watchlist']);
   }
 

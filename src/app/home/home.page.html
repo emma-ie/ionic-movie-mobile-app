@@ -28,6 +28,9 @@
   <ion-button (click)="searchMovies()" expand="block" shape="round">Search</ion-button>
 
   <h4>Today's Trending Movies</h4>
+
+  <p *ngIf=""movies.length === 0>No movies could be loaded.</p>
+
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let movie of movies">

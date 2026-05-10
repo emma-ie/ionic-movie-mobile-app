@@ -5,19 +5,32 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root',
 })
 export class MyDataService {
-  constructor(private storage: Storage){
+  constructor(private storage: Storage) {
     this.init();
   }
 
-  async init(){
-    await this.storage.create();
+  async init() {
+    try {
+      await this.storage.create();
+    } catch (error) {
+      console.log("Storage init error: ", error);
+    }
   }
 
-  async set(key: string, value: any){
-    await this.storage.set(key, value);
+  async set(key: string, value: any) {
+    try {
+      await this.storage.set(key, value);
+    } catch (error) {
+      console.log("Storage set error: ", error);
+    }
   }
 
-  async get(key: string){
-    return await this.storage.get(key);
+  async get(key: string) {
+    try {
+      return await this.storage.get(key);
+    } catch (error) {
+      console.log("Storage get error: ", error);
+      return null;
+    }
   }
 }

@@ -44,9 +44,11 @@
           AKA {{ person.also_known_as?.[0] }}
         </span>
       </ion-card-title>
+
       <ion-card-subtitle *ngIf="person?.birthday">{{ person.birthday }} <span *ngIf="person?.deathday">to {{
           person.deathday }}</span>
       </ion-card-subtitle>
+
     </ion-card-header>
     <ion-card-content>
       {{ person.biography }}
@@ -66,9 +68,11 @@
 
         <ion-img slot="end" *ngIf="m.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + m.poster_path">
         </ion-img>
+        
         <p slot="end" *ngIf="!m.poster_path">
           <i>No image</i>
         </p>
+
       </ion-item>
     </ion-list>
   </ion-card>

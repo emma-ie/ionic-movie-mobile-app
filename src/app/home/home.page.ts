@@ -23,18 +23,18 @@ export class HomePage {
   keyword: string = "";
   movies: Movie[] = [];
   favourites: Movie[] = [];
-  
+
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService, private watchlist: WatchlistService) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.loadTrendingMovies();
   }
 
-  async loadTrendingMovies(){
+  async loadTrendingMovies() {
     console.log("Loading trending movies");
 
     const options: HttpOptions = {
@@ -42,11 +42,15 @@ export class HomePage {
     }
 
     let result = await this.mhs.get(options);
-    this.movies = result.data.results;
+    if (result?.data?.results) {
+      this.movies = result.data.results;
+    } else {
+      this.movies = [];
+    }
   }
 
   async searchMovies() {
-    if (!this.keyword){
+    if (!this.keyword) {
       return;
     }
 
@@ -54,36 +58,36 @@ export class HomePage {
     this.router.navigate(['/movies']);
   }
 
-  async loadFavourites(){
+  async loadFavourites() {
     this.favourites = await this.favService.getFavourites();
   }
 
-  async toggleFavourite(movie: Movie){
+  async toggleFavourite(movie: Movie) {
     await this.favService.addRemoveFavourites(movie);
-    this.loadFavourites();
+    this.favourites = await this.favService.getFavourites();
   }
 
-  isFavourite(movie: Movie): boolean{
+  isFavourite(movie: Movie): boolean {
     return this.favService.isFavourite(movie);
   }
 
-  async toggleWatchlist(movie: Movie){
+  async toggleWatchlist(movie: Movie) {
     await this.watchlist.addRemoveWatchlist(movie);
   }
 
-  isInWatchlist(movie: Movie): boolean{
+  isInWatchlist(movie: Movie): boolean {
     return this.watchlist.isInWatchlist(movie);
   }
 
-  goToFavourites(){
+  goToFavourites() {
     this.router.navigate(['/favourites']);
   }
 
-  goNewMovies(){
+  goNewMovies() {
     this.router.navigate(['/upcoming-movies']);
   }
 
-  goWatchlist(){
+  goWatchlist() {
     this.router.navigate(['/watchlist']);
   }
 

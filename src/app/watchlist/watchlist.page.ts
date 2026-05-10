@@ -14,17 +14,20 @@ import { MyDataService } from '../services/my-data-service';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonGrid, IonRow, IonCol, IonButtons, IonBackButton, IonButton, IonIcon, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent]
 })
-export class WatchlistPage implements OnInit {
+export class WatchlistPage {
 
   movies: Movie[] = [];
 
-  constructor(private watchlist: WatchlistService, private router: Router, private mds: MyDataService) { }
+  constructor(private watchlist: WatchlistService, private router: Router, private mds: MyDataService) {}
 
-  ngOnInit() {
-  }
-
-  async ionViewWillEnter(){
-    this.movies = await this.watchlist.getWatchlist();
+  async ionViewWillEnter() {
+    try {
+      this.movies = await this.watchlist.getWatchlist();
+    }
+    catch (error) {
+      console.log("Error loading watchlist: ", error);
+      this.movies = [];
+    }
   }
 
   openMovie(movie: Movie) {
@@ -33,16 +36,21 @@ export class WatchlistPage implements OnInit {
     this.router.navigate(['/movie-details', movie.id]);
   }
 
-  async toggleWatchlist(movie: Movie){
-    await this.watchlist.addRemoveWatchlist(movie);
-    this.movies = await this.watchlist.getWatchlist();
+  async toggleWatchlist(movie: Movie) {
+    try {
+      await this.watchlist.addRemoveWatchlist(movie);
+      this.movies = await this.watchlist.getWatchlist();
+    }
+    catch (error) {
+      console.log("Error updating watchlist: ", error);
+    }
   }
 
-  goHome(){
+  goHome() {
     this.router.navigate(['/']);
   }
 
-  goNewMovies(){
+  goNewMovies() {
     this.router.navigate(['/upcoming-movies']);
   }
 
