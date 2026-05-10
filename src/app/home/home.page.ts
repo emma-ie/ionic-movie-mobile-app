@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonIcon, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButtons } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonIcon, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButtons, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { MyDataService } from '../services/my-data-service';
 import { HttpOptions } from '@capacitor/core';
@@ -15,7 +15,7 @@ import { WatchlistService } from '../services/watchlist-service';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonIcon, IonButton, FormsModule, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, CommonModule, IonButtons],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonIcon, IonButton, FormsModule, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, CommonModule, IonCol, IonGrid, IonRow, IonButtons],
 })
 export class HomePage {
 

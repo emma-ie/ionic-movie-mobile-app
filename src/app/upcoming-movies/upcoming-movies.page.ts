@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonGrid, IonCol, IonRow, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton } from '@ionic/angular/standalone';
 import { Movie } from '../models/movie.model';
 import { MyHttpService } from '../services/my-http-service';
 import { MyDataService } from '../services/my-data-service';
@@ -9,20 +9,22 @@ import { Router } from '@angular/router';
 import { FavouritesService } from '../services/favourites-service';
 import { HttpOptions } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
+import { WatchlistService } from '../services/watchlist-service';
 
 @Component({
   selector: 'app-upcoming-movies',
   templateUrl: './upcoming-movies.page.html',
   styleUrls: ['./upcoming-movies.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCardContent, IonIcon, IonButton, IonCardSubtitle, IonGrid, IonRow, IonCol, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton]
 })
 export class UpcomingMoviesPage implements OnInit {
 
   movies: Movie[] = [];
   favourites: Movie[] = [];
+  watchlistMovies: Movie[] = [];
 
-  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService) { }
+  constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService, private watchlist: WatchlistService) { }
 
   ngOnInit() {
     this.loadUpcomingMovies()
@@ -49,6 +51,19 @@ export class UpcomingMoviesPage implements OnInit {
 
   isFavourite(movie: Movie): boolean {
     return this.favService.isFavourite(movie);
+  }
+
+ async toggleWatchlist(movie: Movie) {
+    await this.watchlist.addRemoveWatchlist(movie);
+    this.loadWatchlist();
+  }
+
+  async loadWatchlist() {
+    this.watchlistMovies = await this.watchlist.getWatchlist();
+  }
+
+  isInWatchlist(movie: Movie): boolean {
+    return this.watchlist.isInWatchlist(movie);
   }
 
   goToFavourites() {

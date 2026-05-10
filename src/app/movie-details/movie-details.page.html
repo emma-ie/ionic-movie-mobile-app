@@ -41,10 +41,12 @@
     <ion-card-content>
       {{ movie.overview }}
     </ion-card-content>
-    <ion-button (click)="toggleFavourite(movie)" class="fav-button">
+
+    <ion-button (click)="toggleFavourite(movie)" shape="round" class="fav-button">
       <ion-icon class="fav-icon" [name]="isFavourite(movie) ? 'heart' : 'heart-outline'"></ion-icon>
       {{ buttonText(movie) }}
     </ion-button>
+
   </ion-card>
 
 
