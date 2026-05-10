@@ -37,16 +37,16 @@ export class HomePage {
     this.loadTrendingMovies();
   }
 
-  getRandomMovie(){
-    if (!this.movies || this.movies.length ===0 ){
-      return;
+  async getRandomMovie(){
+    try{ 
+      const movie = await this.mhs.getRandomPopularMovie();
+    
+      if (movie){
+        this.openMovie(movie);
+      }
+    } catch (error){
+      console.log("Error getting random movie: ", error);
     }
-
-    // Random index: https://www.w3schools.com/js/js_random.asp
-    const randomIndex = Math.floor(Math.random() * this.movies.length);
-    const movie = this.movies[randomIndex];
-
-    this.openMovie(movie);
   }
 
   async loadTrendingMovies() {

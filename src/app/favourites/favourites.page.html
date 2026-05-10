@@ -26,7 +26,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
   <ion-text *ngIf="favourites.length === 0">
     <h1>No favourites added yet.</h1>
   </ion-text>
@@ -37,7 +37,7 @@
         <ion-card>
 
           <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + fav.poster_path"
-            (click)="openMovie(fav)" />
+            (click)="openMovie(fav)"/>
 
           <ion-card-header>
             <ion-card-title>{{ fav?.title }}</ion-card-title>

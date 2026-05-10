@@ -43,7 +43,7 @@
       <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let movie of movies">
         <ion-card>
           <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-            (click)="openMovie(movie)" />
+            (click)="openMovie(movie)"/>
 
           <ion-card-header>
             <ion-card-title>{{ movie?.title }}</ion-card-title>
