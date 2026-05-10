@@ -13,16 +13,16 @@
 
     <ion-buttons slot="end">
 
-      <ion-button (click)="goToFavourites()">
-        <ion-icon color="danger" name="heart-outline"></ion-icon>
-      </ion-button>
-
       <ion-button (click)="goNewMovies()">
         <ion-icon name="calendar-outline"></ion-icon>
       </ion-button>
 
       <ion-button (click)="goWatchlist()">
         <ion-icon name="bookmark-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="goToFavourites()">
+        <ion-icon color="danger" name="heart-outline"></ion-icon>
       </ion-button>
 
     </ion-buttons>
@@ -33,7 +33,7 @@
 
   <!-- Movie overview -->
   <ion-card *ngIf="movie">
-    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"/>
+    <img alt="Movie poster" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
     <ion-card-header>
       <ion-card-title>{{ movie.title }}</ion-card-title>
       <ion-card-subtitle>{{ movie.release_date }}</ion-card-subtitle>

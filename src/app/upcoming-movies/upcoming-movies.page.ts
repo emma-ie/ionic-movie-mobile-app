@@ -33,7 +33,7 @@ export class UpcomingMoviesPage implements OnInit {
       console.log("Loading upcoming movies");
 
       const options: HttpOptions = {
-        url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + environment.apiKey
+        url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + environment.apiKey + "&region=IE"
       }
 
       let result = await this.mhs.get(options);

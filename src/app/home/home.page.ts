@@ -27,7 +27,7 @@ export class HomePage {
   favourites: Movie[] = [];
 
   constructor(private mds: MyDataService, private router: Router, private mhs: MyHttpService, private favService: FavouritesService, private watchlist: WatchlistService) {
-    addIcons({diceOutline});
+    addIcons({ diceOutline });
   }
 
   ngOnInit() {
@@ -37,14 +37,14 @@ export class HomePage {
     this.loadTrendingMovies();
   }
 
-  async getRandomMovie(){
-    try{ 
+  async getRandomMovie() {
+    try {
       const movie = await this.mhs.getRandomPopularMovie();
-    
-      if (movie){
+
+      if (movie) {
         this.openMovie(movie);
       }
-    } catch (error){
+    } catch (error) {
       console.log("Error getting random movie: ", error);
     }
   }
